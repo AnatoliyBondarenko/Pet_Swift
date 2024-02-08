@@ -57,9 +57,14 @@ class QuesViewController: UIViewController{
         setupViews()
         setConstreints()
     }
+    func returnVC (){
+        print("выполняется функция  returnVC ()")
+        self.navigationController?.popViewController(animated: true)
+    }
     
     @objc func touchHelp5050Button(){
         print("tapHelp5050Button")
+       returnVC()
     }
     
     @objc func touchHelpAudienceButton(){

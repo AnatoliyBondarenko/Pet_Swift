@@ -159,7 +159,9 @@
 				04D4C0862B60316A0038839F /* FirstViewController.swift */,
 				04E1DBBD2B617BEE0052FC11 /* RulesViewController.swift */,
 				04E1DBBB2B617B8E0052FC11 /* MainGameViewController.swift */,
+				04E1DBC82B66613D0052FC11 /* GameCollection */,
 				04E1DBD02B66713C0052FC11 /* QuesViewController.swift */,
+				04E1DBC92B6661AE0052FC11 /* QuestionCollectoin */,
 				04E1DBBF2B617C2F0052FC11 /* TeamViewController.swift */,
 			);
 			path = Controllers;
@@ -169,7 +171,6 @@
 			isa = PBXGroup;
 			children = (
 				04D4C0B52B611AF10038839F /* extensionUI.swift */,
-				04E1DBC82B66613D0052FC11 /* GameCollection */,
 			);
 			path = UI_View;
 			sourceTree = "<group>";
@@ -180,7 +181,6 @@
 				04E1DBC42B628AE30052FC11 /* GameCollectoinView.swift */,
 				04E1DBC62B6506DA0052FC11 /* GameCollectionCellModel.swift */,
 				04E1DBC22B6289DA0052FC11 /* GameCollectoinViewCell.swift */,
-				04E1DBC92B6661AE0052FC11 /* QuestionCollectoin */,
 			);
 			path = GameCollection;
 			sourceTree = "<group>";

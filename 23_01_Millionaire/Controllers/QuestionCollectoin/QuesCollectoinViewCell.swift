@@ -31,8 +31,11 @@ class QuesCollectoinViewCell: UICollectionViewCell{
         button.addTarget(self, action: #selector(tappAswerButton), for: .touchUpInside)
         return button
     }()
+    //создал обьект класс QuesViewController() в котором есть метод returnVC()
+    let transitionCV = QuesViewController()
     @objc func tappAswerButton(){
         let buttonText = answerButton.titleLabel?.text
+        transitionCV.returnVC()
         print("tappAswerButton\(String(describing: buttonText))")
     }
     
