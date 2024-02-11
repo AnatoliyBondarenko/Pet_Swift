@@ -18,8 +18,36 @@ class QuesViewController: UIViewController{
         return image
     }()
     
-    let quesCollectoinView = QuesCollectoinView()
+    private lazy var questionNumber: UILabel = {
+       let label = UILabel()
+        label.text = "QuesNum: "
+        label.textColor = .descriptionTitleColor
+        return label
+    }()
+        
+    private lazy var questionPrise: UILabel = {
+       let label = UILabel()
+        label.textColor = .whiteTitleColor
+        label.text = "$500"
+        return label
+    }()
+       
+    private lazy var timerImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "timer_image_regular")
+        return imageView
+    }()
     
+    private lazy var questionTextLabel: UILabel = {
+        let textLabel = UILabel()
+        textLabel.textColor = .whiteTitleColor
+        textLabel.font = UIFont.systemFont(ofSize: 24)
+        textLabel.textAlignment = .center
+        textLabel.text = "Question"
+        return textLabel
+    }()
+    let quesCollectoinView = QuesCollectoinView()
+   
     private lazy var helpStackView: UIStackView = {
      let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -56,15 +84,14 @@ class QuesViewController: UIViewController{
         super.viewDidLoad()
         setupViews()
         setConstreints()
+        // 3 шаг    из QuesViewController передаем данные в коллецию
+        // (передаем в коллекцию наш родительский VC (самого себя))
+        quesCollectoinView.parrentVC = self
     }
-    func returnVC (){
-        print("выполняется функция  returnVC ()")
-        self.navigationController?.popViewController(animated: true)
-    }
+
     
     @objc func touchHelp5050Button(){
         print("tapHelp5050Button")
-       returnVC()
     }
     
     @objc func touchHelpAudienceButton(){
@@ -77,8 +104,11 @@ class QuesViewController: UIViewController{
     
     func setupViews(){
         view.addSubview(backgroundImage)
+        view.addSubview(questionNumber)
+        view.addSubview(questionPrise)
+        view.addSubview(timerImageView)
+        view.addSubview(questionTextLabel)
         view.addSubview(quesCollectoinView)
-        
         view.addSubview(helpStackView)
         helpStackView.addArrangedSubview(help5050Button)
         helpStackView.addArrangedSubview(helpAudienceButton)
@@ -98,6 +128,32 @@ class QuesViewController: UIViewController{
             backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+        questionNumber.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            questionNumber.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
+            questionNumber.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            questionNumber.heightAnchor.constraint(equalToConstant: 19)
+        ])
+        
+        questionPrise.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            questionPrise.topAnchor.constraint(equalTo: questionNumber.bottomAnchor, constant: 1),
+            questionPrise.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            questionPrise.heightAnchor.constraint(equalToConstant: 21)
+        ])
+        timerImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            timerImageView.topAnchor.constraint(equalTo: questionPrise.bottomAnchor, constant: 32),
+            timerImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            timerImageView.heightAnchor.constraint(equalToConstant: 45)
+        ])
+        questionTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            questionTextLabel.topAnchor.constraint(equalTo: timerImageView.bottomAnchor, constant: 24),
+            questionTextLabel.leadingAnchor.constraint(equalTo: quesCollectoinView.leadingAnchor),
+            questionTextLabel.trailingAnchor.constraint(equalTo: quesCollectoinView.trailingAnchor),
+            questionTextLabel.bottomAnchor.constraint(equalTo: quesCollectoinView.topAnchor, constant: -32)
         ])
         quesCollectoinView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

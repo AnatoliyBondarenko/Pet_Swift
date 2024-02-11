@@ -32,14 +32,14 @@ class QuesCollectoinViewCell: UICollectionViewCell{
         return button
     }()
     //создал обьект класс QuesViewController() в котором есть метод returnVC()
-    let transitionCV = QuesViewController()
+   // let transitionCV = QuesViewController()
     @objc func tappAswerButton(){
         let buttonText = answerButton.titleLabel?.text
-        transitionCV.returnVC()
+        parrentVC.navigationController?.popViewController(animated: true)
         print("tappAswerButton\(String(describing: buttonText))")
     }
-    
-    
+    // 2 шаг внутри ячейки collectionView создаем
+    var parrentVC: QuesViewController!
     //MARK: - Lifecycle
     
     override init(frame: CGRect) {
@@ -68,8 +68,6 @@ class QuesCollectoinViewCell: UICollectionViewCell{
         NSLayoutConstraint.activate([
             answerNumLabel.centerYAnchor.constraint(equalTo: answerGameView.centerYAnchor),
             answerNumLabel.leadingAnchor.constraint(equalTo: answerGameView.leadingAnchor,constant: 25),
-           // answerGameView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            //answerGameView.bottomAnchor.constraint(equalTo: answerGameView.bottomAnchor),
         ])
         answerButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
