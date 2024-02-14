@@ -19,6 +19,7 @@ class QuesCollectoinViewCell: UICollectionViewCell{
     private lazy var answerNumLabel: UILabel = {
         let label = UILabel()
         label.textColor = .timerItemRedColor
+       
         label.font = UIFont.systemFont(ofSize: 20)
         label.text = "A:"
         return label
@@ -34,9 +35,18 @@ class QuesCollectoinViewCell: UICollectionViewCell{
     //создал обьект класс QuesViewController() в котором есть метод returnVC()
    // let transitionCV = QuesViewController()
     @objc func tappAswerButton(){
+    
         let buttonText = answerButton.titleLabel?.text
-        parrentVC.navigationController?.popViewController(animated: true)
-        print("tappAswerButton\(String(describing: buttonText))")
+        if buttonText == correctAnswer {
+            if gameLevel < 14{gameLevel += 1}
+            else {gameLevel = 0}
+            parrentVC.navigationController?.popViewController(animated: true)
+            print("tappAswerButton\(String(describing: buttonText))")
+        }
+        else{
+            parrentVC.navigationController?.popViewController(animated: true)
+            print("tappAswerButton\(String(describing: buttonText))")
+        }
     }
     // 2 шаг внутри ячейки collectionView создаем
     var parrentVC: QuesViewController!
@@ -84,11 +94,11 @@ class QuesCollectoinViewCell: UICollectionViewCell{
         fatalError("init(coder:) has not been implemented")
     }
     
+   
     
     func setConfigurationAnswerCell(index: Int) {
         answerNumLabel.text = QuesCollectionCellViewModel[index].answerNumber
-        answerButton.setTitle(QuesCollectionCellViewModel[index].answerText, for: .normal) 
-       
+        answerButton.setTitle(QuesCollectionCellViewModel[index].answerText, for: .normal)
     }
     
 }

@@ -22,9 +22,7 @@ class MainGameViewController: UIViewController {
         imageView.image = UIImage(named: "logo_image")
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .clear
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-//        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+
         return imageView
     }()
     
@@ -35,6 +33,17 @@ class MainGameViewController: UIViewController {
         setupViews()
         setConstreints()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+           super.viewWillAppear(animated)
+           
+           // Перезаполнение коллекции
+           //reloadData()
+        gameCollectoinView.collectionView.reloadData()
+       }
+   
+
+    
     private func setupViews(){
         tapView()
         view.addSubview(backgroundImage)

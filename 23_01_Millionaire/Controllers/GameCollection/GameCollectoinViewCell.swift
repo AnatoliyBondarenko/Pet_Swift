@@ -76,7 +76,15 @@ class GameCollectoinViewCell: UICollectionViewCell {
         ])
     }
     func setConfigurationCell(index: Int) {
-        stepGameView.image = UIImage(named: GameCollectionCellViewModel[index].stepColor)
+        if gameLevel == 15 - index {
+            stepGameView.image = UIImage(named: "levels_green_button")
+//            if gameLevel < 15 {gameLevel += 1}
+//            else {gameLevel = 1}
+//            print(gameLevel)
+        }
+        else{
+            stepGameView.image = UIImage(named:GameCollectionCellViewModel[index].stepColor)
+        }
         stepGameNomberLabel.text = GameCollectionCellViewModel[index].stepNumber
         stepGameValueLabel.text = GameCollectionCellViewModel[index].stepPrice
        

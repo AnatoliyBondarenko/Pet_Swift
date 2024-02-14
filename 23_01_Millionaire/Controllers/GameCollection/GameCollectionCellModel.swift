@@ -8,6 +8,9 @@
 import Foundation
 import UIKit
 
+var gameLevel = 0
+var correctAnswer = ""
+
 struct GameCollectionCellModel {
     var stepNumber: String
     var stepPrice: String

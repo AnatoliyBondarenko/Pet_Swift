@@ -19,19 +19,20 @@ class QuesViewController: UIViewController{
     }()
     
     private lazy var questionNumber: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.text = "QuesNum: "
-        label.textColor = .descriptionTitleColor
+        //label.textColor = .descriptionTitleColor
+        label.textColor = .red
         return label
     }()
-        
+    
     private lazy var questionPrise: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.textColor = .whiteTitleColor
         label.text = "$500"
         return label
     }()
-       
+    
     private lazy var timerImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "timer_image_regular")
@@ -44,12 +45,16 @@ class QuesViewController: UIViewController{
         textLabel.font = UIFont.systemFont(ofSize: 24)
         textLabel.textAlignment = .center
         textLabel.text = "Question"
+        textLabel.numberOfLines = 0
+        
+        // textLabel.minimumScaleFactor = 0.5
+        // textLabel.adjustsFontSizeToFitWidth = true
         return textLabel
     }()
     let quesCollectoinView = QuesCollectoinView()
-   
+    
     private lazy var helpStackView: UIStackView = {
-     let stackView = UIStackView()
+        let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 10
@@ -88,7 +93,7 @@ class QuesViewController: UIViewController{
         // (передаем в коллекцию наш родительский VC (самого себя))
         quesCollectoinView.parrentVC = self
     }
-
+    
     
     @objc func touchHelp5050Button(){
         print("tapHelp5050Button")
@@ -103,6 +108,7 @@ class QuesViewController: UIViewController{
     }
     
     func setupViews(){
+        setCurrentIssue()
         view.addSubview(backgroundImage)
         view.addSubview(questionNumber)
         view.addSubview(questionPrise)
@@ -113,14 +119,14 @@ class QuesViewController: UIViewController{
         helpStackView.addArrangedSubview(help5050Button)
         helpStackView.addArrangedSubview(helpAudienceButton)
         helpStackView.addArrangedSubview(helpCallButton)
-//        helpStackView = UIStackView(arrangedSubviews:[
-//            help5050Button,
-//            helpAudienceButton,
-//            helpCallButton
-//        ] )
+        //        helpStackView = UIStackView(arrangedSubviews:[
+        //            help5050Button,
+        //            helpAudienceButton,
+        //            helpCallButton
+        //        ] )
         
     }
-
+    
     func setConstreints(){
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -169,6 +175,44 @@ class QuesViewController: UIViewController{
             helpStackView.trailingAnchor.constraint(equalTo: quesCollectoinView.trailingAnchor),
             helpStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
+    }
+    func setCurrentIssue(){
+        let questionCurrent = GameBrain()
+        questionNumber.text = "Question #" + GameCollectionCellViewModel[14 - gameLevel].stepNumber
+        questionPrise.text = GameCollectionCellViewModel[14 - gameLevel].stepPrice
+        switch ((gameLevel) / 5) {
+        case 0:
+            let randomQuestion = Int.random(in: 0...3)
+            questionTextLabel.text = questionCurrent.easy[randomQuestion].question
+            correctAnswer = questionCurrent.easy[randomQuestion].correctAnswer
+            let answer = questionCurrent.easy[randomQuestion].correctAnswer
+            print(answer)
+            for ind in 0...3{
+                QuesCollectionCellViewModel[ind].answerText = questionCurrent.easy[randomQuestion].answers[ind]
+              
+            }
+        case 1:
+            let randomQuestion = Int.random(in: 0...3)
+            questionTextLabel.text = questionCurrent.normal[randomQuestion].question
+            correctAnswer = questionCurrent.normal[randomQuestion].correctAnswer
+            let answer = questionCurrent.normal[randomQuestion].correctAnswer
+            print(answer)
+            for ind in 0...3{
+                QuesCollectionCellViewModel[ind].answerText = questionCurrent.normal[randomQuestion].answers[ind]
+               
+            }
+        case 2:
+            let randomQuestion = Int.random(in: 0...3)
+            questionTextLabel.text = questionCurrent.hard[randomQuestion].question
+            correctAnswer = questionCurrent.hard[randomQuestion].correctAnswer
+            let answer = questionCurrent.hard[randomQuestion].correctAnswer
+            print(answer)
+            for ind in 0...3{
+                QuesCollectionCellViewModel[ind].answerText = questionCurrent.hard[randomQuestion].answers[ind]
+            }
+        default: break
+            
+        }
     }
 }
 
