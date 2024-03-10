@@ -15,9 +15,13 @@ class QuesCollectoinView: UIView, UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.quesCollectoinViewCellId, for: indexPath) as!QuesCollectoinViewCell
         cell.setConfigurationAnswerCell(index: indexPath.item)
+       // из коллекции передаем данные в ячейку
+       // cell.parrentVC = parrentVC (передаем в коллекцию наш родительский VC)
+        cell.parrentVC = parrentVC
         return cell
     }
-    
+    // 1 шаг внутри collectionView создаем переменную
+    var parrentVC: QuesViewController!
     
     var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
